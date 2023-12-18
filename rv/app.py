@@ -60,8 +60,8 @@ class AppWindow(ctk.CTk):
         self.clear_button = ctk.CTkButton(self.options_frame, text="Clear")
         self.clear_button.grid(row=7, column=0, sticky=tk.NSEW, pady=5, padx=5)
 
-        self.option_algorith= ctk.CTkOptionMenu(self.options_frame, values=["BFS", "A*", "BIDIRECCIONAL"])
-        self.option_algorith.grid(row=8, column=0, sticky=tk.NSEW, pady=5, padx=5)
+        self.option_algorith= ctk.CTkOptionMenu(self.options_frame, values=["A*", "BFS", "BIDIRECCIONAL"])
+        #self.option_algorith.grid(row=8, column=0, sticky=tk.NSEW, pady=5, padx=5)
 
         self.text_box = ctk.CTkTextbox(self.options_frame, width=100, height=200)
         self.text_box.grid(row=9,column=0,sticky=tk.NSEW, pady=5, padx=5)

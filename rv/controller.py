@@ -49,14 +49,19 @@ class Controller():
             self.animate_path()
 
         elif algorith == "BIDIRECCIONAL":
+            # print("bidireccional")
+            # path = bidirectional_search(self.grafo, ini, fin)
+            # self.drawPath(path)
             print("bidireccional")
             path = bidirectional_search(self.grafo, ini, fin)
-            self.drawPath(path)
-
+            self.animate_path()
         else:
+            # print("bfs")
+            # path = buscar_nodo_en_grafoBFS(self.grafo, ini, fin)
+            # self.drawPath(path)
             print("bfs")
             path = buscar_nodo_en_grafoBFS(self.grafo, ini, fin)
-            self.drawPath(path)
+            self.animate_path()
 
         for i in self.app.objetos:
             self.app.text_box.insert("end", i+"\n")
@@ -92,7 +97,6 @@ class Controller():
             start = self.animation_path[self.animation_index]
             end = self.animation_path[self.animation_index + 1]
             
-            print(type(self.animate_path))
 
             start_coords = (start.getX(), start.getY())
             end_coords = (end.getX(), end.getY())
