@@ -28,7 +28,7 @@ class AppWindow(ctk.CTk):
         self.options_frame.grid(row=0, column=0, sticky=tk.NSEW, ipadx=10, ipady=10, padx=(0, 10), pady=(0,10))
         self.options_frame.columnconfigure(0,weight=1)
         self.ima = Image.open("View/imagenes/mapa.png")
-        self.nuevaima = self.ima.resize((1200,650))
+        self.nuevaima = self.ima.resize((1000,700))
 
         self.gf = ImageTk.PhotoImage(self.nuevaima)
 
