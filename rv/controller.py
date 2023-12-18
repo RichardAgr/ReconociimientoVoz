@@ -1,5 +1,7 @@
 import math
 import tkinter
+from threading import Thread
+import time
 
 import customtkinter as ctk
 from PIL import Image, ImageTk
@@ -19,6 +21,7 @@ class Controller():
 
         self.drawBackground()
         self.draw_Nodes()
+        self.listaa= []
 
         self.animation_speed = 2000  # Intervalo en milisegundos (1 segundo)
         self.animation_index = 0
@@ -71,6 +74,25 @@ class Controller():
         if self.animation_index < len(self.animation_path) - 1:
             start = self.animation_path[self.animation_index]
             end = self.animation_path[self.animation_index + 1]
+
+            start_coords = (start.getX(), start.getY())
+            end_coords = (end.getX(), end.getY())
+
+            self.drawEdge(start_coords[0], start_coords[1], end_coords[0], end_coords[1], self.app.color)
+            self.animation_index += 1
+
+            time.sleep(self.animation_speed / 1000.0)  # Pausa para el siguiente paso
+            self.animate_step()
+        else:
+            self.animation_index = 0  # Reinicia el índice para futuras animaciones
+
+
+    def animate_step(self):
+        if self.animation_index < len(self.animation_path) - 1:
+            start = self.animation_path[self.animation_index]
+            end = self.animation_path[self.animation_index + 1]
+            
+            print(type(self.animate_path))
 
             start_coords = (start.getX(), start.getY())
             end_coords = (end.getX(), end.getY())
