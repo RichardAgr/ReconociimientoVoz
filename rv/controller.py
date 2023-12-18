@@ -20,6 +20,10 @@ class Controller():
         self.drawBackground()
         self.draw_Nodes()
 
+        self.animation_speed = 2000  # Intervalo en milisegundos (1 segundo)
+        self.animation_index = 0
+        self.animation_path = []
+
         self.app.send_agent_button.configure(command=lambda: self.run_algorithm())
         self.app.clear_button.configure(command=lambda: self.clear())
         self.app.mainloop()
@@ -33,9 +37,13 @@ class Controller():
         algorith = self.app.option_algorith.get()
 
         if algorith == "A*":
-            print("estrella")
+            # print("estrella")
+            # path = astar(self.grafo, ini, fin)
+            # self.drawPath(path)
+
             path = astar(self.grafo, ini, fin)
-            self.drawPath(path)
+            self.animation_path = path
+            self.animate_path()
 
         elif algorith == "BIDIRECCIONAL":
             print("bidireccional")
@@ -49,6 +57,31 @@ class Controller():
 
         for i in self.app.objetos:
             self.app.text_box.insert("end", i+"\n")
+
+
+    # def animate_path(self):
+    #     if self.animation_path:
+    #         self.app.after(self.animation_speed, self.animate_step)
+    def animate_path(self):
+        # Crea un hilo para la animación de la ruta
+        animation_thread = Thread(target=self.animate_step)
+        animation_thread.start()
+
+    def animate_step(self):
+        if self.animation_index < len(self.animation_path) - 1:
+            start = self.animation_path[self.animation_index]
+            end = self.animation_path[self.animation_index + 1]
+
+            start_coords = (start.getX(), start.getY())
+            end_coords = (end.getX(), end.getY())
+
+            self.drawEdge(start_coords[0], start_coords[1], end_coords[0], end_coords[1], self.app.color)
+            self.animation_index += 1
+
+            self.app.after(self.animation_speed, self.animate_step)
+        else:
+            self.animation_index = 0  # Reinicia el índice para futuras animaciones
+
 
     def drawBackground(self):
         for n in self.nodes:
