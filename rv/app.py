@@ -36,7 +36,7 @@ class AppWindow(ctk.CTk):
         self.img_frame.grid(row=0, column=1, sticky=tk.NSEW, ipadx=10, ipady=10, padx=(0,10))
         self.img_frame.create_image(10, 10, image=self.gf, anchor=tk.NW)
 
-        self.label = ctk.CTkLabel(self.options_frame, text="AGENTES IA")
+        self.label = ctk.CTkLabel(self.options_frame, text="RECONOCIMIENTO DE VOZ")
         self.label.grid(row=0, column=0, sticky=tk.NSEW)
 
         self.label_start = ctk.CTkLabel(self.options_frame, text="Inicio")
