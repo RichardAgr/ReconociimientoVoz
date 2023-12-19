@@ -9,7 +9,6 @@ class CombinadorPalabras:
     def combinar_palabras(self, lista_palabras):
         palabras_encontradas = [palabra for palabra in lista_palabras if palabra in self.palabras_clave]
 
-        # Verificar si hay suficientes elementos en la lista
         if len(palabras_encontradas) >= 3:
             # Verificar si los índices existen antes de acceder a ellos
             palabra_0 = palabras_encontradas[0] if len(palabras_encontradas) > 0 else ""

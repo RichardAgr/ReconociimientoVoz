@@ -41,6 +41,9 @@ class ChatBot:
         self.response("iremos al destino que seleciono con gusto", ["iremos", "destino"],required_words=["destino"])
 
         self.response("estamos saliendo de la estacion de taxi del norte", ["norte"],required_words=["norte"])
+        self.response("estamos saliendo de la estacion de taxi del sur", ["sur"],required_words=["sur"])
+        self.response("estamos saliendo de la estacion de taxi del este", ["este"],required_words=["este"])
+        self.response("estamos saliendo de la estacion de taxi del oeste", ["oeste"],required_words=["oeste"])
 
     def get_response(self ,user_input):
         split_message = re.split(r'\s|[,:;.?!-_]\s*', user_input.lower())
@@ -109,6 +112,12 @@ class ChatBot:
         response("siempre a la orden",["gracias", "agradezco", "thanks"],single_response=True,)
         response("que tenga un buen dia",["adios", "chao", "hasta", "luego"],single_response=True,)
         
+        response("iremos al destino que seleciono con gusto", ["iremos", "destino"],required_words=["destino"])
+
+        response("estamos saliendo de la estacion de taxi del norte", ["norte"],required_words=["norte"])
+        response("estamos saliendo de la estacion de taxi del sur", ["sur"],required_words=["sur"])
+        response("estamos saliendo de la estacion de taxi del este", ["este"],required_words=["este"])
+        response("estamos saliendo de la estacion de taxi del oeste", ["oeste"],required_words=["oeste"])
 
         best_match = max(highest_prob, key=highest_prob.get)
         #print(highest_prob)

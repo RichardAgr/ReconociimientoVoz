@@ -43,9 +43,7 @@ class Controller():
 
     def encender_micro(self):
         texto_reconocido = self.reconocedorDeVoz.reconocer_audio()
-        #user_input = self.app.entradaa.get()
-        #response = self.chatbot.get_response(user_input)
-        print("fffffff"+texto_reconocido)
+        print("------>"+texto_reconocido)
         procesador = ProcesadorTexto(texto_reconocido)
         palabras = procesador.obtener_palabras()
 
@@ -72,8 +70,6 @@ class Controller():
 
         elif "vamos" in palabras and "rápido" in palabras:
             texto_reconocido = "vamos rapido"
-            self.destino = "e1"
-            self.inicio = "e34"
             self.run_taxi()
 
 
@@ -135,10 +131,6 @@ class Controller():
         for i in self.app.objetos:
             self.app.text_box.insert("end", i+"\n")
 
-
-    # def animate_path(self):
-    #     if self.animation_path:
-    #         self.app.after(self.animation_speed, self.animate_step)
     def animate_path(self):
         # Crea un hilo para la animación de la ruta
         animation_thread = Thread(target=self.animate_step)
@@ -214,7 +206,7 @@ class Controller():
             print("esta vacia")
 
     def drawEdge(self,x1,y1,x2,y2, color):
-        self.app.img_frame.create_line(x1, y1, x2, y2, fill=color, width=3)
+        self.app.img_frame.create_line(x1, y1, x2, y2, fill=color, width=4)
 
     def draw_Nodes(self):
         self.nodes
