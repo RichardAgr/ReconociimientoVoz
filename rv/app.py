@@ -13,7 +13,7 @@ class AppWindow(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("App")
-        self.geometry("1200x580")
+        self.geometry("1300x700")
         self.resizable(False,False)
         self.update_idletasks()
         self.color = "red"
@@ -27,12 +27,12 @@ class AppWindow(ctk.CTk):
         self.options_frame = ctk.CTkFrame(self.main_frame, width=1200,height=650)
         self.options_frame.grid(row=0, column=0, sticky=tk.NSEW, ipadx=10, ipady=10, padx=(0, 10), pady=(0,10))
         self.options_frame.columnconfigure(0,weight=1)
-        self.ima = Image.open("View/imagenes/mapa.png")
-        self.nuevaima = self.ima.resize((1000,700))
+        self.ima = Image.open("View/imagenes/mapaCocha2.png")
+        self.nuevaima = self.ima.resize((1275,800))
 
         self.gf = ImageTk.PhotoImage(self.nuevaima)
 
-        self.img_frame = ctk.CTkCanvas(self.main_frame, width=1200, height=650, bg="#0E6063")
+        self.img_frame = ctk.CTkCanvas(self.main_frame, width=1200, height=800, bg="#0E6063")
         self.img_frame.grid(row=0, column=1, sticky=tk.NSEW, ipadx=10, ipady=10, padx=(0,10))
         self.img_frame.create_image(10, 10, image=self.gf, anchor=tk.NW)
 
@@ -59,6 +59,9 @@ class AppWindow(ctk.CTk):
 
         self.clear_button = ctk.CTkButton(self.options_frame, text="Clear")
         self.clear_button.grid(row=7, column=0, sticky=tk.NSEW, pady=5, padx=5)
+        
+        self.clear_button = ctk.CTkButton(self.options_frame, text="Off/On Microfono")
+        self.clear_button.grid(row=8, column=0, sticky=tk.NSEW, pady=5, padx=5)
 
         self.option_algorith= ctk.CTkOptionMenu(self.options_frame, values=["A*", "BFS", "BIDIRECCIONAL"])
         #self.option_algorith.grid(row=8, column=0, sticky=tk.NSEW, pady=5, padx=5)
