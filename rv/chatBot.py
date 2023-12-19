@@ -48,9 +48,10 @@ class ChatBot:
             highest_prob[bot_response] = self.message_probability(message, list_of_words, single_response, required_words)
 
         response('Hola', ['hola', 'klk', 'saludos', 'buenas'], single_response = True)
-        response('Estoy bien y tu?', ['como', 'estas', 'va', 'vas', 'sientes'], required_words=['como'])
+        response('Estoy bien y tu?', ['cómo', 'estas', 'va', 'vas', 'sientes'], required_words=['cómo'])
         response('Estamos ubicados en la calle 23 numero 123', ['ubicados', 'direccion', 'donde', 'ubicacion'], single_response=True)
         response('Siempre a la orden', ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
+        response('ella no te ama',['amor','querida','alegre'], required_words=['amor'])
 
         best_match = max(highest_prob, key=highest_prob.get)
         #print(highest_prob)

@@ -10,6 +10,9 @@ from Model.GrafoNoDirigido import GrafoNoDirigido
 from Model.ManagerFile import ManagerFile
 from View.Algorithms import astar, buscar_nodo_en_grafoBFS, bidirectional_search
 from chatBot import ChatBot
+from reconocedor import ReconocedorVoz
+from sintetizdorVoz import TextToSpeech
+
 
 class Controller():
     def __init__(self, app):
@@ -24,22 +27,32 @@ class Controller():
         self.draw_Nodes()
         self.listaa= []
         self.chatbot = ChatBot()
+        self.reconocedorDeVoz= ReconocedorVoz()
 
         self.animation_speed = 2000  # Intervalo en milisegundos (1 segundo)
         self.animation_index = 0
         self.animation_path = []
 
-        # self.app.send_agent_button.configure(command=lambda: self.run_algorithm())
-        self.app.send_agent_button.configure(command=lambda: self.encender_micro())
+        self.app.send_agent_button.configure(command=lambda: self.run_algorithm())
+        self.app.mensaje.configure(command=lambda: self.encender_micro())
         self.app.clear_button.configure(command=lambda: self.clear())
         self.app.mainloop()
 
     def encender_micro(self):
-        if self.variable==0:
-            self.variable=1
-            user_input = self.app.entradaa.get()
-            response = self.chatbot.get_response(user_input)
+        texto_reconocido = self.reconocedorDeVoz.reconocer_audio()
+        #user_input = self.app.entradaa.get()
+        #response = self.chatbot.get_response(user_input)
+        if texto_reconocido is not None:
+            texto_reconocido = texto_reconocido.lower()
+            response = self.chatbot.get_response(texto_reconocido)
             print("Bot: " + response)
+            tts_objeto = TextToSpeech()
+            tts_objeto.reproducir_audio(response)
+            self.app.entradaa.delete(0, tkinter.END)
+        else:
+            print("No se reconoció texto o hubo un error en el reconocimiento.")
+
+            
     
     def run_algorithm(self):
         start = self.app.entry_start.get()

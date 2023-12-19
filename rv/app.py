@@ -64,7 +64,7 @@ class AppWindow(ctk.CTk):
         #self.option_algorith.grid(row=8, column=0, sticky=tk.NSEW, pady=5, padx=5)
 
         self.text_box = ctk.CTkTextbox(self.options_frame, width=100, height=200)
-        self.text_box.grid(row=9,column=0,sticky=tk.NSEW, pady=5, padx=5)
+        self.text_box.grid(row=10,column=0,sticky=tk.NSEW, pady=5, padx=5)
         #self.text_box.configure(state="disabled")
         
         self.entradaa = ctk.CTkEntry(self.options_frame, placeholder_text="ingrese el inicio")
