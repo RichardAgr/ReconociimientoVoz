@@ -47,11 +47,87 @@ class ChatBot:
             nonlocal highest_prob
             highest_prob[bot_response] = self.message_probability(message, list_of_words, single_response, required_words)
 
-        response('Hola', ['hola', 'klk', 'saludos', 'buenas'], single_response = True)
-        response('Estoy bien y tu?', ['cómo', 'estas', 'va', 'vas', 'sientes'], required_words=['cómo'])
-        response('Estamos ubicados en la calle 23 numero 123', ['ubicados', 'direccion', 'donde', 'ubicacion'], single_response=True)
-        response('Siempre a la orden', ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
-        response('ella no te ama',['amor','querida','alegre'], required_words=['amor'])
+        # response('Hola', ['hola', 'klk', 'saludos', 'buenas'], single_response = True)
+        # response('Estoy bien y tu?', ['cómo', 'estas', 'va', 'vas', 'sientes'], required_words=['cómo'])
+        # response('Estamos ubicados en la calle 23 numero 123', ['ubicados', 'direccion', 'donde', 'ubicacion'], single_response=True)
+        # response('Siempre a la orden', ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
+        # response('ella no te ama',['amor','querida','alegre'], required_words=['amor'])
+
+         # Saludos y preguntas iniciales
+        self.add_response(
+            "hola", ["hola", "klk", "saludos", "buenas"], single_response=True
+        )
+        self.add_response(
+            "estoy bien y tú?",
+            ["como", "estas", "va", "vas", "sientes"],
+            required_words=["como"],
+        )
+        self.add_response(
+            "que bien", ["igual", "bien", "igualemente"], single_response=True
+        )
+        # Sobre el servicio del taxi
+        self.add_response(
+            "si estoy de servicio",
+            ["servicio", "disponible", "Esta libre"],
+            required_words=["esta"],
+        )
+        self.add_response(
+            "esta bien, subase",
+            ["direccion", "destino", "ubicacion", "lugar"],
+            required_words=["direccion"],
+        )
+        # Preguntas sobre costos y tarifas
+        self.add_response(
+            "lo siento, pero nuestros precios son fijos",
+            ["regatear", "costo", "descuento", "rebajar", "negociar"],
+            required_words=["descuento"],
+        )
+        self.add_response(
+            "el costo dependerá del destino y la distancia",
+            ["cuanto", "costo", "precio", "tarifa", "cobra"],
+            required_words=["cuanto"],
+        )
+        # Tiempo estimado de llegada
+        self.add_response(
+            "llegaremos en aproximadamente 10 minutos",
+            ["cuanto", "tiempo", "llegar", "demora"],
+            required_words=["tiempo"],
+        )
+        # Sobre el método de pago
+        self.add_response(
+            "aceptamos efectivo y tarjetas",
+            ["pago", "efectivo", "tarjeta", "metodo"],
+            single_response=True,
+        )
+        # Fin de la carrera
+        self.add_response(
+            "hemos llegado a su destino",
+            ["llegamos", "aqui", "destino", "final"],
+            single_response=True,
+        )
+        # Dejar comentarios
+        self.add_response(
+            "si desea puede dejar un comentario o valoración sobre nuestro servicio en nuestra pagina",
+            ["comentario", "valoracion", "opinion"],
+            required_words=["comentario"],
+        )
+        # Objetos perdidos
+        self.add_response(
+            "Si ha olvidado algo en el vehículo puedo buscarlo ahora",
+            ["olvidado", "objeto", "perdido"],
+            required_words=["olvidado"],
+        )
+        # Agradecimientos y despedidas
+        self.add_response(
+            "siempre a la orden",
+            ["gracias", "agradezco", "thanks"],
+            single_response=True,
+        )
+        self.add_response(
+            "que tenga un buen dia",
+            ["adios", "chao", "hasta", "luego"],
+            single_response=True,
+        )
 
         best_match = max(highest_prob, key=highest_prob.get)
         #print(highest_prob)

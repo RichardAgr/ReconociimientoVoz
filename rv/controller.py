@@ -42,6 +42,8 @@ class Controller():
         texto_reconocido = self.reconocedorDeVoz.reconocer_audio()
         #user_input = self.app.entradaa.get()
         #response = self.chatbot.get_response(user_input)
+        print("fffffff"+texto_reconocido)
+
         if texto_reconocido is not None:
             texto_reconocido = texto_reconocido.lower()
             response = self.chatbot.get_response(texto_reconocido)
