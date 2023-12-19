@@ -204,7 +204,7 @@ class Controller():
                                      text=node_id, text_color="black")
                 self.app.img_frame.create_window(x, y, window=label)
             else:
-                self.app.img_frame.create_oval(x - 15, y - 15, x + 15, y + 15, fill="blue")
+                self.app.img_frame.create_oval(x - 6, y - 6, x + 6, y + 6, fill="blue")
                 self.app.img_frame.create_text(x, y, text=node_id)
 
     def draw_Nodes2(self):

@@ -12,6 +12,30 @@ class ChatBot:
         self.response('Estamos ubicados en la calle 23 numero 123', ['ubicados', 'direccion', 'donde', 'ubicacion'], single_response=True)
         self.response('Siempre a la orden', ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
 
+         # Saludos y preguntas iniciales
+        self.response("hola", ["hola", "klk", "saludos", "buenas"], single_response=True)
+        self.response("estoy bien y tú?",["como", "estas", "va", "vas", "sientes"],required_words=["como"],)
+        self.response("que bien", ["igual", "bien", "igualemente"], single_response=True)
+        # Sobre el servicio del taxi
+        self.response("si estoy de servicio",["servicio", "disponible", "Esta libre"],required_words=["esta"],)
+        self.response("esta bien, subase", ["direccion", "destino", "ubicacion", "lugar"], required_words=["direccion"],)
+        # Preguntas sobre costos y tarifas
+        self.response("lo siento, pero nuestros precios son fijos",["regatear", "costo", "descuento", "rebajar", "negociar"],required_words=["descuento"],)
+        self.response("el costo dependerá del destino y la distancia",["cuanto", "costo", "precio", "tarifa", "cobra"],required_words=["cuanto"], )
+        # Tiempo estimado de llegada
+        self.response("llegaremos en aproximadamente 10 minutos",["cuanto", "tiempo", "llegar", "demora"],required_words=["tiempo"],)
+        # Sobre el método de pago
+        self.response("aceptamos efectivo y tarjetas",["pago", "efectivo", "tarjeta", "metodo"],single_response=True,)
+        # Fin de la carrera
+        self.response("hemos llegado a su destino",["llegamos", "aqui", "destino", "final"],single_response=True,)
+        # Dejar comentarios
+        self.response("si desea puede dejar un comentario o valoración sobre nuestro servicio en nuestra pagina",["comentario", "valoracion", "opinion"],required_words=["comentario"],)
+        # Objetos perdidos
+        self.response("Si ha olvidado algo en el vehículo puedo buscarlo ahora",["olvidado", "objeto", "perdido"],required_words=["olvidado"],)
+        # Agradecimientos y despedidas
+        self.response("siempre a la orden",["gracias", "agradezco", "thanks"],single_response=True,)
+        self.response("que tenga un buen dia",["adios", "chao", "hasta", "luego"],single_response=True,)
+
     def get_response(self ,user_input):
         split_message = re.split(r'\s|[,:;.?!-_]\s*', user_input.lower())
         response = self.check_all_messages(split_message)
@@ -47,87 +71,35 @@ class ChatBot:
             nonlocal highest_prob
             highest_prob[bot_response] = self.message_probability(message, list_of_words, single_response, required_words)
 
-        # response('Hola', ['hola', 'klk', 'saludos', 'buenas'], single_response = True)
-        # response('Estoy bien y tu?', ['cómo', 'estas', 'va', 'vas', 'sientes'], required_words=['cómo'])
-        # response('Estamos ubicados en la calle 23 numero 123', ['ubicados', 'direccion', 'donde', 'ubicacion'], single_response=True)
-        # response('Siempre a la orden', ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
-        # response('ella no te ama',['amor','querida','alegre'], required_words=['amor'])
-
-         # Saludos y preguntas iniciales
-        self.add_response(
-            "hola", ["hola", "klk", "saludos", "buenas"], single_response=True
-        )
-        self.add_response(
-            "estoy bien y tú?",
-            ["como", "estas", "va", "vas", "sientes"],
-            required_words=["como"],
-        )
-        self.add_response(
-            "que bien", ["igual", "bien", "igualemente"], single_response=True
-        )
+        response('Hola', ['hola', 'klk', 'saludos', 'buenas'], single_response = True)
+        response('Estoy bien y tu?', ['cómo', 'estas', 'va', 'vas', 'sientes'], required_words=['cómo'])
+        response('Estamos ubicados en la calle 23 numero 123', ['ubicados', 'direccion', 'donde', 'ubicacion'], single_response=True)
+        response('Siempre a la orden', ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
+        response('ella no te ama',['amor','querida','alegre'], required_words=['amor'])
+        # Saludos y preguntas iniciales
+        response("hola", ["hola", "klk", "saludos", "buenas"], single_response=True)
+        response("estoy bien y tú?",["como", "estas", "va", "vas", "sientes"],required_words=["como"],)
+        response("que bien", ["igual", "bien", "igualemente"], single_response=True)
         # Sobre el servicio del taxi
-        self.add_response(
-            "si estoy de servicio",
-            ["servicio", "disponible", "Esta libre"],
-            required_words=["esta"],
-        )
-        self.add_response(
-            "esta bien, subase",
-            ["direccion", "destino", "ubicacion", "lugar"],
-            required_words=["direccion"],
-        )
+        response("si estoy de servicio",["servicio", "disponible", "Esta libre"],required_words=["esta"],)
+        response("esta bien, subase", ["direccion", "destino", "ubicacion", "lugar"], required_words=["direccion"],)
         # Preguntas sobre costos y tarifas
-        self.add_response(
-            "lo siento, pero nuestros precios son fijos",
-            ["regatear", "costo", "descuento", "rebajar", "negociar"],
-            required_words=["descuento"],
-        )
-        self.add_response(
-            "el costo dependerá del destino y la distancia",
-            ["cuanto", "costo", "precio", "tarifa", "cobra"],
-            required_words=["cuanto"],
-        )
+        response("lo siento, pero nuestros precios son fijos",["regatear", "costo", "descuento", "rebajar", "negociar"],required_words=["descuento"],)
+        response("el costo dependerá del destino y la distancia",["cuanto", "costo", "precio", "tarifa", "cobra"],required_words=["cuanto"], )
         # Tiempo estimado de llegada
-        self.add_response(
-            "llegaremos en aproximadamente 10 minutos",
-            ["cuanto", "tiempo", "llegar", "demora"],
-            required_words=["tiempo"],
-        )
+        response("llegaremos en aproximadamente 10 minutos",["cuanto", "tiempo", "llegar", "demora"],required_words=["tiempo"],)
         # Sobre el método de pago
-        self.add_response(
-            "aceptamos efectivo y tarjetas",
-            ["pago", "efectivo", "tarjeta", "metodo"],
-            single_response=True,
-        )
+        response("aceptamos efectivo y tarjetas",["pago", "efectivo", "tarjeta", "metodo"],single_response=True,)
         # Fin de la carrera
-        self.add_response(
-            "hemos llegado a su destino",
-            ["llegamos", "aqui", "destino", "final"],
-            single_response=True,
-        )
+        response("hemos llegado a su destino",["llegamos", "aqui", "destino", "final"],single_response=True,)
         # Dejar comentarios
-        self.add_response(
-            "si desea puede dejar un comentario o valoración sobre nuestro servicio en nuestra pagina",
-            ["comentario", "valoracion", "opinion"],
-            required_words=["comentario"],
-        )
+        response("si desea puede dejar un comentario o valoración sobre nuestro servicio en nuestra pagina",["comentario", "valoracion", "opinion"],required_words=["comentario"],)
         # Objetos perdidos
-        self.add_response(
-            "Si ha olvidado algo en el vehículo puedo buscarlo ahora",
-            ["olvidado", "objeto", "perdido"],
-            required_words=["olvidado"],
-        )
+        response("Si ha olvidado algo en el vehículo puedo buscarlo ahora",["olvidado", "objeto", "perdido"],required_words=["olvidado"],)
         # Agradecimientos y despedidas
-        self.add_response(
-            "siempre a la orden",
-            ["gracias", "agradezco", "thanks"],
-            single_response=True,
-        )
-        self.add_response(
-            "que tenga un buen dia",
-            ["adios", "chao", "hasta", "luego"],
-            single_response=True,
-        )
+        response("siempre a la orden",["gracias", "agradezco", "thanks"],single_response=True,)
+        response("que tenga un buen dia",["adios", "chao", "hasta", "luego"],single_response=True,)
+        
 
         best_match = max(highest_prob, key=highest_prob.get)
         #print(highest_prob)
