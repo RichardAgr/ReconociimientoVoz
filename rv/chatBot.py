@@ -32,9 +32,15 @@ class ChatBot:
         self.response("si desea puede dejar un comentario o valoración sobre nuestro servicio en nuestra pagina",["comentario", "valoracion", "opinion"],required_words=["comentario"],)
         # Objetos perdidos
         self.response("Si ha olvidado algo en el vehículo puedo buscarlo ahora",["olvidado", "objeto", "perdido"],required_words=["olvidado"],)
+        #salir o aceptar el viaje
+        self.response("esta bien saldremos a su destino", ["vamos", "rápido"],required_words=["vamos"])
         # Agradecimientos y despedidas
         self.response("siempre a la orden",["gracias", "agradezco", "thanks"],single_response=True,)
         self.response("que tenga un buen dia",["adios", "chao", "hasta", "luego"],single_response=True,)
+
+        self.response("iremos al destino que seleciono con gusto", ["iremos", "destino"],required_words=["destino"])
+
+        self.response("estamos saliendo de la estacion de taxi del norte", ["norte"],required_words=["norte"])
 
     def get_response(self ,user_input):
         split_message = re.split(r'\s|[,:;.?!-_]\s*', user_input.lower())
@@ -96,7 +102,10 @@ class ChatBot:
         response("si desea puede dejar un comentario o valoración sobre nuestro servicio en nuestra pagina",["comentario", "valoracion", "opinion"],required_words=["comentario"],)
         # Objetos perdidos
         response("Si ha olvidado algo en el vehículo puedo buscarlo ahora",["olvidado", "objeto", "perdido"],required_words=["olvidado"],)
+        #salir o aceptar el viaje
+        response("esta bien saldremos a su destino", ["vamos", "rápido"],required_words=["vamos"])
         # Agradecimientos y despedidas
+        
         response("siempre a la orden",["gracias", "agradezco", "thanks"],single_response=True,)
         response("que tenga un buen dia",["adios", "chao", "hasta", "luego"],single_response=True,)
         

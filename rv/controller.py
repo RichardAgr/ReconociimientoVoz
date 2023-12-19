@@ -12,7 +12,8 @@ from View.Algorithms import astar, buscar_nodo_en_grafoBFS, bidirectional_search
 from chatBot import ChatBot
 from reconocedor import ReconocedorVoz
 from sintetizdorVoz import TextToSpeech
-
+from splitTexto import ProcesadorTexto
+from combinadorText import CombinadorPalabras
 
 class Controller():
     def __init__(self, app):
@@ -21,15 +22,17 @@ class Controller():
         self.grafo = GrafoNoDirigido
         self.grafo = self.manage.obGrafoSinText(self.grafo)
         self.nodes = self.manage.obtenerNodesMana(self.grafo)
-        self.variable = 0
+        self.inicio = None
+        self.destino= None
 
         self.drawBackground()
         self.draw_Nodes()
         self.listaa= []
         self.chatbot = ChatBot()
         self.reconocedorDeVoz= ReconocedorVoz()
+        self.combinador = CombinadorPalabras()
 
-        self.animation_speed = 2000  # Intervalo en milisegundos (1 segundo)
+        self.animation_speed = 200  # Intervalo en milisegundos (1 segundo)
         self.animation_index = 0
         self.animation_path = []
 
@@ -43,6 +46,37 @@ class Controller():
         #user_input = self.app.entradaa.get()
         #response = self.chatbot.get_response(user_input)
         print("fffffff"+texto_reconocido)
+        procesador = ProcesadorTexto(texto_reconocido)
+        palabras = procesador.obtener_palabras()
+
+        if "quiero" in palabras and "ir" in palabras: #para ver si encontramos el destino
+            resultado_combinado = self.combinador.combinar_palabras(palabras)
+            # self.destino = resultado_combinado
+            self.destino = "e1"
+            texto_reconocido = "iremos destino"
+            
+        elif ("saldremos" in palabras) and ("norte" in palabras or "sur" in palabras or "este" in palabras or "oeste" in palabras) : #para ir o salir al destino
+            if "norte" in palabras:
+                self.inicio = "norte"
+                texto_reconocido = "norte"
+            elif "sur" in palabras:
+                self.inicio = "sur"
+                texto_reconocido = "sur"
+            elif "oeste" in palabras:
+                self.inicio = "oeste"
+                texto_reconocido = "oeste"
+            else:
+                # self.inicio = "este"
+                self.inicio = "e34"
+                texto_reconocido = "este"
+
+        elif "vamos" in palabras and "rápido" in palabras:
+            texto_reconocido = "vamos rapido"
+            self.destino = "e1"
+            self.inicio = "e34"
+            self.run_taxi()
+
+
 
         if texto_reconocido is not None:
             texto_reconocido = texto_reconocido.lower()
@@ -54,7 +88,27 @@ class Controller():
         else:
             print("No se reconoció texto o hubo un error en el reconocimiento.")
 
-            
+    def run_taxi(self):
+        ini = self.grafo.getVertex(self.inicio)
+        fin = self.grafo.getVertex(self.destino)
+
+        algorith = self.app.option_algorith.get()
+
+        if algorith == "A*":
+            path = astar(self.grafo, ini, fin)
+            self.animation_path = path
+            self.animate_path()
+
+        elif algorith == "BIDIRECCIONAL":
+            print("bidireccional")
+            path = bidirectional_search(self.grafo, ini, fin)
+            self.animate_path()
+        else:
+            print("bfs")
+            path = buscar_nodo_en_grafoBFS(self.grafo, ini, fin)
+            self.animate_path()
+        for i in self.app.objetos:
+            self.app.text_box.insert("end", i+"\n")
     
     def run_algorithm(self):
         start = self.app.entry_start.get()
